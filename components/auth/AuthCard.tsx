@@ -16,7 +16,6 @@ export const AuthCard = () => {
         <p className="text-center text-gray-600">Sign-in</p>
         <SignInButtonWithProvider provider="google" />
         <SignInButtonWithProvider provider="github" />
-        <SignInButtonWithProvider provider="facebook" />
       </div>
     </div>
   );

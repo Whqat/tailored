@@ -24,17 +24,17 @@ const Navbar = ({ session }: { session: Session | null }) => {
                             >
                                 <div className="w-10 rounded-full">
                                     <img
-                                        alt="Tailwind CSS Navbar component"
+                                        alt="PFP"
                                         src={session?.user?.image as string}
                                     />
                                 </div>
                             </div>
                             <ul
                                 tabIndex={0}
-                                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+                                className="mt-3 z-[1000] px-3 py-4 shadow menu menu-sm dropdown-content bg-base-300 rounded-box w-52"
                             >
                                 <li>
-                                    <a className="justify-between">Profile</a>
+                                    <Link href="/profile">Profile</Link>
                                 </li>
                                 <li>
                                     <a>Settings</a>
@@ -51,7 +51,7 @@ const Navbar = ({ session }: { session: Session | null }) => {
                                 <Link href="/create-post">Post</Link>
                             </li>
                             <li>
-                                <Link href="/auth">Log in</Link>
+                                <Link href="/auth" className="bg-primary text-primary-content hover:bg-primary/80 ml-1">Log in</Link>
                             </li>
                         </ul>
                 )}

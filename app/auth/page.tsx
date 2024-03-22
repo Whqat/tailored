@@ -17,7 +17,7 @@ export default async function AuthPage() {
   }
 
   return (
-    <section className="md:1/4 h-full mx-auto flex flex-col gap-3 items-center justify-center">
+    <section className="md:1/4 h-screen mx-auto flex flex-col gap-3 items-center justify-center">
       <AuthCard />
     </section>
   );

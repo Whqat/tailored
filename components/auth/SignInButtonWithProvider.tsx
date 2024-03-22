@@ -4,7 +4,7 @@
 import { useState } from "react";
 
 //Icons
-import { FaGithub, FaFacebook, FaGoogle } from "react-icons/fa";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { signIn } from "@/lib/auth/actions";
@@ -18,14 +18,10 @@ const providersConfig = {
     label: "Sign in with Google",
     icon: <FaGoogle />,
   }, 
-  facebook: {
-    label: "Sign in with Facebook",
-    icon: <FaFacebook />,
-  }, 
 };
 
 interface SignInButtonWithProviderProps {
-  provider: "google" | "github" | "facebook";
+  provider: "google" | "github";
   disabled?: boolean;
   params?: { email: string };
 }

@@ -1,4 +1,4 @@
-//Next auth
+// Next auth
 import { getServerSession } from "next-auth";
 
 // Next navigation
@@ -7,10 +7,11 @@ import { redirect } from "next/navigation";
 // Options
 import { authOptions } from "@/lib/utils/auth";
 
-
 // db
-import { User } from "@/models/models";
 import dbConnect from "@/lib/utils/mongooseConnection";
+
+// server action
+import PostForm from "@/components/PostForm";
 
 export default async function Home() {
     await dbConnect();
@@ -22,8 +23,8 @@ export default async function Home() {
     }
 
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
-           <h1>Protected route</h1> 
+        <main className="flex min-h-screen flex-col items-center gap-10 p-24">
+            <PostForm session={session} />
         </main>
     );
 }

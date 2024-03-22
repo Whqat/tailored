@@ -22,12 +22,12 @@ const PostSchema = new mongoose.Schema({
         type: String,
         required: true,
         maxlength: 50,
-        minlength: 8,
+        minlength: 5,
     },
     content: {
         type: String,
         required: true,
-        minlength: 24,
+        minlength: 18,
         maxlength: 1200,
     },
     author: {
@@ -42,9 +42,10 @@ const PostSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-    }
+    },
 });
 
 // export models
+console.log("MODELS", mongoose.models)
 export const User = mongoose.models.User || mongoose.model("User", UserSchema);
-export const Post = mongoose.models.Post || mongoose.model("Post", PostSchema)
+export const Post = mongoose.models.Post || mongoose.model("Post", PostSchema);
