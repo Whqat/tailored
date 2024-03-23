@@ -12,9 +12,15 @@ const nextConfig = {
                 pathname: "/**",
             },
             {
-                //allow from lh3.googleusercontent.com
+                // allow from lh3.googleusercontent.com
                 protocol: "https",
                 hostname: "lh3.googleusercontent.com",
+                pathname: "/**",
+            },
+            {
+                // allow from avatars.githubusercontent.com
+                protocol: "https",
+                hostname: "avatars.githubusercontent.com",
                 pathname: "/**",
             },
         ],

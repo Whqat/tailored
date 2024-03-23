@@ -1,20 +1,17 @@
 "use server";
 
 import dbConnect from "@/lib/utils/mongooseConnection";
-import { Post, User } from "@/models/models";
+import { Post } from "@/models/post.model";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 // Server action to create a post
 export default async function createPost(newPost: any) {
     const title = newPost.title;
     const content = newPost.content;
-    const authorEmail = newPost.author;
+    const author = newPost.author;
     const thumbnail = newPost.thumbnail
 
     await dbConnect();
-
-    const authorObject = await User.findOne({ email: authorEmail });
-    const author = authorObject?._id;
 
     try {
         const post = await Post.create({

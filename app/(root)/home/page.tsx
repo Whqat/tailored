@@ -1,6 +1,6 @@
 // db
 import dbConnect from "@/lib/utils/mongooseConnection";
-import { Post } from "@/models/models";
+import { Post } from "@/models/post.model";
 import PostCard from "@/components/PostCard";
 
 export default async function Home() {
