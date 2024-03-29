@@ -1,11 +1,12 @@
 import { z } from "zod";
 
 export const PostSchema = z.object({
+    id: z.string(),
     title: z
         .string()
         .trim()
-        .min(5, { message: "Title must be at least 5 characters long" })
-        .max(50, { message: "Title must not exceed 50 characters" }),
+        .min(4, { message: "Title must be at least 5 characters long" })
+        .max(64, { message: "Title must not exceed 64 characters" }),
     content: z
         .string()
         .trim()

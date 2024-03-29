@@ -20,7 +20,7 @@ export default async function Home() {
     }
 
     return (
-        <div className="flex min-h-screen flex-col items-center gap-10 p-24">
+        <div className="flex min-h-screen flex-col items-center gap-10 px-20 py-8">
             <PostForm session={session} />
         </div>
     );

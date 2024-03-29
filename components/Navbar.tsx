@@ -4,9 +4,9 @@ import Link from "next/link";
 
 const Navbar = ({ session, userId }: { session: Session | null, userId: string | null }) => {
     return (
-        <div className="absolute navbar z-50 bg-base-100 border-b border-base-content md:px-10 lg:px-16">
+        <div className="relative navbar z-50 bg-base-100 border-b border-base-content md:px-10 lg:px-16">
             <div className="flex-1">
-                <Link href="/home" className="btn btn-ghost text-xl">daisyUI blog</Link>
+                <Link href="/home" className="btn btn-ghost text-xl">tailorit</Link>
             </div>
             <div className="flex-none gap-2">
                 {session ? (

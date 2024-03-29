@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import dbConnect from "@/lib/utils/mongooseConnection";
 
 
 export const metadata: Metadata = {
@@ -7,7 +8,7 @@ export const metadata: Metadata = {
     description: "Authentication template for Next.js applications",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;

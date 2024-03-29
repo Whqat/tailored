@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 // user schema with name, email, and image
 const UserSchema = new Schema({
@@ -21,6 +21,12 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
+    posts: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Post",
+        },
+    ],
 });
 
 // export models

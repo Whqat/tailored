@@ -12,7 +12,7 @@ const ProfilePage = async ({ params }: { params: Params }) => {
         await dbConnect()
         const user = await User.findById(id);
         const session = await getServerSession(authOptions);
-        const isOwner = session?.user?.email === user.email;
+        const isOwner = session?.user?.id === user._id.toString();
 
         return <Profile user={user} isOwner={isOwner} />;
     } catch (error) {

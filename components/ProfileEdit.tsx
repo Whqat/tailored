@@ -9,11 +9,12 @@ import { ChangeEvent, useEffect, useState } from "react";
 import Image from "next/image";
 
 interface UserInterface {
-    _id: number;
+    _id: string;
     name: string;
     email: string;
     image: string;
     bio: string;
+    posts: string[]
 }
 
 interface Props {
@@ -84,7 +85,7 @@ const ProfileEdit = ({ session, user }: Props) => {
                         alt="image"
                         width="300"
                         height="300"
-                        className="object-cover self-center shadow-md border border-base-content bg-base-content"
+                        className="rounded-[100%] min-w-[150px] min-h-[150px] object-cover self-center shadow-md border border-base-content bg-base-content"
                     />
                 )}
                 <div className="flex justify-center gap-3 md:gap-5 lg:gap-10">
@@ -108,7 +109,7 @@ const ProfileEdit = ({ session, user }: Props) => {
                     <label htmlFor="name">Name</label>
                     <input
                         onChange={(e) => handleOnChange(e)}
-                        className="px-4 py-2 md:px-7 md:py-3 lg:px-10 bg-base-100 border border-primary rounded-md text-base-content outline-none placeholder-base-content/50"
+                        className="px-4 py-2 md:px-7 md:py-3 lg:px-10 bg-base-100 border border-base-content rounded-md text-base-content outline-none placeholder-base-content/50"
                         type="text"
                         name="name"
                         id="name"
@@ -121,7 +122,7 @@ const ProfileEdit = ({ session, user }: Props) => {
                     <label htmlFor="bio">Bio</label>
                     <textarea
                         onChange={(e) => handleOnChange(e)}
-                        className="px-4 py-2 md:px-7 md:py-3 lg:px-10 bg-base-100 border border-primary rounded-md text-base-content outline-none placeholder-base-content/50"
+                        className="px-4 py-2 md:px-7 md:py-3 lg:px-10 bg-base-100 border border-base-content rounded-md text-base-content outline-none placeholder-base-content/50"
                         name="bio"
                         id="bio"
                         placeholder="Enter the bio here"
