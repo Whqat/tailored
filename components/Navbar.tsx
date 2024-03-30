@@ -2,15 +2,16 @@ import { Session } from "next-auth";
 import { LogoutButton } from "./auth/LogoutButton";
 import Link from "next/link";
 
-const Navbar = ({ session, userId }: { session: Session | null, userId: string | null }) => {
+const Navbar = ({ session, userId }: { session: Session | null; userId: string | null }) => {
     return (
         <div className="relative navbar z-50 bg-base-100 border-b border-base-content md:px-10 lg:px-16">
             <div className="flex-1">
-                <Link href="/home" className="btn btn-ghost text-xl">tailorit</Link>
+                <Link href="/home" className="btn btn-ghost text-xl">
+                    tailorit
+                </Link>
             </div>
             <div className="flex-none gap-2">
                 {session ? (
-                    
                     <>
                         <ul className="menu menu-horizontal">
                             <li>
@@ -24,10 +25,7 @@ const Navbar = ({ session, userId }: { session: Session | null, userId: string |
                                 className="btn btn-ghost btn-circle avatar"
                             >
                                 <div className="w-10 lg:w-12 bg-base-300 rounded-full border border-base-300 object-fit">
-                                    <img
-                                        alt="PFP"
-                                        src={session?.user?.image as string}
-                                    />
+                                    <img alt="PFP" src={session?.user?.image as string} />
                                 </div>
                             </div>
                             <ul
@@ -37,9 +35,7 @@ const Navbar = ({ session, userId }: { session: Session | null, userId: string |
                                 <li>
                                     <Link href={`/profile/${userId}`}>Profile</Link>
                                 </li>
-                                <li>
-                                    <a>Settings</a>
-                                </li>
+
                                 <li>
                                     <LogoutButton />
                                 </li>
@@ -47,14 +43,19 @@ const Navbar = ({ session, userId }: { session: Session | null, userId: string |
                         </div>
                     </>
                 ) : (
-                        <ul className="menu menu-horizontal">
-                            <li>
-                                <Link href="/create-post">Post</Link>
-                            </li>
-                            <li>
-                                <Link href="/auth" className="bg-primary text-primary-content hover:bg-primary/80 ml-1">Log in</Link>
-                            </li>
-                        </ul>
+                    <ul className="menu menu-horizontal">
+                        <li>
+                            <Link href="/create-post">Post</Link>
+                        </li>
+                        <li>
+                            <Link
+                                href="/auth"
+                                className="bg-primary text-primary-content hover:bg-primary/80 ml-1"
+                            >
+                                Log in
+                            </Link>
+                        </li>
+                    </ul>
                 )}
             </div>
         </div>

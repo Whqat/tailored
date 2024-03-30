@@ -57,7 +57,7 @@ const Profile = ({ user, isOwner }: Props) => {
 
     return (
         <div className="w-screen min-h-screen flex flex-col justify-center items-center bg-base-300 text-base-content pb-20">
-            <div className="flex justify-center">
+            <div className="flex flex-col gap-2 md:flex-row justify-center items-center">
                 <div className="w-[200px] h-[200px] rounded-full flex items-center justify-center">
                     <Image
                         src={user.image as string}
@@ -67,25 +67,27 @@ const Profile = ({ user, isOwner }: Props) => {
                         className="rounded-[100%] min-w-[150px] object-cover min-h-[150px] border border-base-content p-1 bg-base-content"
                     />
                 </div>
-            </div>
-            <h1 className="text-4xl font-bold mt-2">{user.name}</h1>
-            <p className="mx-auto mt-2 px-5 py-1 max-w-[60ch] whitespace-pre-wrap break-words">
-                {user.bio}
-            </p>
-            <div className="flex flex-col gap-6 mt-5">
-                {isOwner && (
-                    <button
-                        type="button"
-                        className="btn btn-primary font-bold px-6 py-2 rounded-lg"
-                        onClick={() => router.push(`/profile/${user._id}/edit`)}
-                    >
-                        Edit Account
-                    </button>
-                )}
+                <div className="flex gap-1 flex-col">
+                    <h1 className="text-4xl text-center md:text-left font-bold mt-2">{user.name}</h1>
+                    <p className="mt-2 text-center md:text-left py-1 max-w-[60ch] whitespace-pre-wrap break-words">
+                        {user.bio}
+                    </p>
+                    {isOwner && (
+                        <button
+                            type="button"
+                            className="btn btn-primary font-bold px-6 mt-2 py-2 rounded-lg"
+                            onClick={() => router.push(`/profile/${user._id}/edit`)}
+                        >
+                            Edit Account
+                        </button>
+                    )}
+                </div>
             </div>
 
             <div>
-                <h1 className="text-3xl md:text-4xl font-bold mt-8 text-center mb-6 md:mb-7 lg:mb-8">{user.name}'s Posts</h1>
+                <h1 className="text-3xl md:text-4xl font-bold mt-8 text-center mb-6 md:mb-7 lg:mb-8">
+                    {user.name}'s Posts
+                </h1>
                 {postsLoading ? (
                     <p className="text-center font-medium">Loading posts...</p>
                 ) : (

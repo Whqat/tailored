@@ -10,7 +10,6 @@ interface PostInterface {
     thumbnail: string;
 }
 
-
 interface Props {
     post: PostInterface;
     isOwner: boolean;
@@ -23,21 +22,23 @@ const PostView = ({ post, isOwner }: Props) => {
 
     return (
         <div className="w-screen px-10 md:px-16 flex flex-col justify-center items-center bg-base-300 text-base-content">
-            <div className="flex justify-center">
-                <div className="w-[500px] h-[500] mt-5 rounded-full flex items-center justify-center">
+            <div className="flex flex-col gap-10 md:gap-1 px-5 md:px-24 mb-5 mt-10 md:flex-row-reverse items-center">
+                <div className="lg:w-[800px] border-b border-base-content flex flex-col items-center justify-center">
                     <Image
                         src={post.thumbnail as string}
                         alt="Thumbnail"
                         width={500}
                         height={500}
-                        className="p-1 shadow-inner shadow-primary"
+                        className="p-1"
                     />
                 </div>
+                <h1 className="text-2xl break-words tracking-wider whitespace-pre-wrap text-center md:text-3xl lg:text-4xl font-bold">
+                    {post.title}
+                </h1>
             </div>
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mt-8 mb-2 md:mb-5 lg:mb-8">{post.title}</h1>
-                <p className="mx-auto mt-2 px-5 py-1 max-w-[45ch] sm:max-w-[70ch] md:max-w-[90ch] lg:max-w-[135ch] whitespace-pre-wrap break-words">
-                    {post.content}
-                </p>
+            <p className="mx-auto tracking-wide text-lg md:text-xl lg:text-2xl mt-2 px-5 py-1 max-w-[45ch] sm:max-w-[70ch] md:max-w-[90ch] lg:max-w-[135ch] whitespace-pre-wrap break-words">
+                {post.content}
+            </p>
             <div className="flex flex-col gap-6 mt-5">
                 {isOwner && (
                     <button
