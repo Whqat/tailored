@@ -39,7 +39,7 @@ const PostForm = ({ session }: { session: Session }) => {
                 type="hidden"
                 name="author"
                 id="author"
-                value={session?.user?.id}
+                value={session.user.id}
             />
             <div className="container font-bold tracking-wide w-screen shadow-inner flex flex-col gap-6 md:gap-8 lg:gap-10 p-10 md:px-20 md:pt-10 md:pb-14 lg:px-32 lg:pb-20 bg-base-200 border rounded-lg border-base-content">
                 <h1 className="text-center text-xl md:text-3xl lg:text-5xl tracking-wide">

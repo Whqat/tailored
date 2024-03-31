@@ -1,23 +1,19 @@
+"use client"
 import Link from "next/link";
-import { User } from "@/models/user.model";
-import dbConnect from "@/lib/utils/mongooseConnection";
 import Image from "next/image";
 interface Props {
     id: string;
     title: string;
     content: string;
     authorId: string;
+    authorName: string;
+    authorImage: string;
     thumbnail: string;
     date: string;
 }
 
-const PostCard = async ({ id, title, content, authorId, thumbnail, date }: Props) => {
-    await dbConnect();
+const PostCard = ({ id, title, content, authorId, authorName, authorImage, thumbnail, date }: Props) => {
 
-    const author = await User.findById(authorId);
-    const authorName = author.name;
-    const authorImage = author.image;
-    
     return (
         <div className="group hover:translate-x-0.5 hover:-translate-y-0.5 transition-transform duration-300 border-t-4 border-r border-primary card rounded-3xl relative cursor-pointer overflow-hidden w-screen max-h-[13rem] sm:max-h-[16rem] md:max-h-[18rem] lg:max-h-[20rem] bg-base-100 image-full">
             <figure className="h-full p-0.5 group-hover:blur-sm group-hover:brightness-[13%] blur-none brightness-[50%] transition duration-300 ease-in-out">
@@ -31,9 +27,10 @@ const PostCard = async ({ id, title, content, authorId, thumbnail, date }: Props
                 <h2 className="card-title lg:text-2xl font-medium mb-2 md:mb-4 lg:mb-6 text-white tracking-wider line-clamp-1">{title}</h2>
                 <p className="overflow-clip text-clip text-white tracking-wide font-normal">{content}</p>
                 <div className="card-actions justify-end">
-                    <Link href={`post/${id}`} className="absolute inset-0 z-30"></Link>
+                    <Link href={`post/${id}`} scroll={false} className="absolute inset-0 z-30"></Link>
                     <Link
                         className="text-white line-clamp-1 text-sm rounded-xl border-b border-l group-hover:translate-x-0.5 group-hover:-translate-y-0.5 duration-300 hover:underline transition-all border-primary justify-center items-center flex gap-1 lg:gap-2 mt-4 font-medium tracking-wide mb-2 z-30 px-3 py-2"
+                        scroll={false}
                         href={`/profile/${authorId.toString()}`}
                     >
                         <Image

@@ -21,7 +21,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
         }
 
         // Pagination logic (adjust as needed)
-        const limit = 10; // adjust limit as needed
+        const limit = 3; // adjust limit as needed
         const skip = (page - 1) * limit;
 
         // Find all posts for the user with pagination

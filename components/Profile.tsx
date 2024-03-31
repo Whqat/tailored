@@ -2,7 +2,6 @@
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import PostCard from "./PostCard";
 import PostCardClient from "./PostCardClient";
 
 interface PostInterface {
@@ -30,6 +29,7 @@ interface Props {
 
 const Profile = ({ user, isOwner }: Props) => {
     const router = useRouter();
+    const [page, setPage] = useState(1);
     const [posts, setPosts] = useState<any[]>([]);
     const [postsLoading, setPostsLoading] = useState(false);
 
@@ -39,12 +39,12 @@ const Profile = ({ user, isOwner }: Props) => {
         const fetchPosts = async () => {
             setPostsLoading(true);
             try {
-                const response = await fetch(`/api/user/${user._id}/posts?page=1`); // Adjust API route path
+                const response = await fetch(`/api/user/${user._id}/posts?page=${page}`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch posts");
                 }
                 const data = await response.json();
-                setPosts(data.posts);
+                setPosts(posts.concat(data.posts));
             } catch (err) {
                 console.error(err);
             } finally {
@@ -53,7 +53,7 @@ const Profile = ({ user, isOwner }: Props) => {
         };
 
         fetchPosts();
-    }, [user._id]); // Re-run effect on user change
+    }, [user._id, page]); // Re-run effect on user change
 
     return (
         <div className="w-screen min-h-screen flex flex-col justify-center items-center bg-base-300 text-base-content pb-20">
@@ -68,7 +68,9 @@ const Profile = ({ user, isOwner }: Props) => {
                     />
                 </div>
                 <div className="flex gap-1 flex-col">
-                    <h1 className="text-4xl text-center md:text-left font-bold mt-2">{user.name}</h1>
+                    <h1 className="text-4xl text-center md:text-left font-bold mt-2">
+                        {user.name}
+                    </h1>
                     <p className="mt-2 text-center md:text-left py-1 max-w-[60ch] whitespace-pre-wrap break-words">
                         {user.bio}
                     </p>
@@ -117,6 +119,15 @@ const Profile = ({ user, isOwner }: Props) => {
                             </h1>
                         )}
                     </div>
+                )}
+                {user.posts.length > posts.length && (
+                    <button
+                        type="button"
+                        className="btn btn-primary font-bold px-6 mt-2 py-2 rounded-lg"
+                        onClick={() => setPage(page + 1)}
+                    >
+                        Load more
+                    </button>
                 )}
             </div>
         </div>
