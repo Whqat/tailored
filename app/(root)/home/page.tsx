@@ -1,7 +1,9 @@
 "use client";
 
 import PostCard from "@/components/PostCard";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 interface ApiPostInterface {
     _id: string;
@@ -15,6 +17,8 @@ interface ApiPostInterface {
 }
 
 export default function Home() {
+    const params = useSearchParams();
+    const router = useRouter();
     const [scrollPosition, setScrollPosition] = useState<number | null>(null);
     const [numberOfPostsInDb, setNumberOfPostsInDb] = useState(0);
     const [page, setPage] = useState(1);
@@ -55,6 +59,13 @@ export default function Home() {
         }
     }, [posts]); // Re-run effect on post change
 
+    useEffect(() => {
+        if (params.get("success")) {
+            toast.success("Post created sucessfully");
+            router.push("/home"); // Clear query param
+        }
+    }, [params]); // Re-run effect on query param change
+
     return (
         <main className="flex min-h-screen flex-col items-center gap-10 p-8 md:p-12 lg:p-16">
             <h1 className="text-2xl sm:text-3xl tracking-wide md:text-4xl md:tracking-wider text-base-content font-bold">
@@ -64,7 +75,7 @@ export default function Home() {
                 {postsLoading ? (
                     <p className="text-center font-medium">Loading posts...</p>
                 ) : (
-                    <div className="container flex flex-wrap gap-4 justify-center">
+                    <div className="container flex flex-wrap gap-4 md:gap-5 lg:gap-7 justify-center">
                         {posts ? (
                             posts.map((post: ApiPostInterface) => {
                                 const date = new Date(post.createdAt);

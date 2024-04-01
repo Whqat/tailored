@@ -1,6 +1,6 @@
 import { User } from "@/models/user.model";
 import { Post } from "@/models/post.model";
-import { NextResponse, type NextRequest } from "next/server";
+import { type NextRequest } from "next/server";
 
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
     const userID = params.id;

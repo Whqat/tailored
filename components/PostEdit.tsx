@@ -84,8 +84,13 @@ const PostEdit = ({ session, user, post }: Props) => {
 
     return (
         <form action={clientAction}>
-            <input type="hidden" name="postId" id="postId" value={post._id.toString() } />
-            <input type="hidden" name="authorId" id="authorId" value={post.author.toString() } />
+            <input type="hidden" name="postId" id="postId" value={post._id.toString()} />
+            <input
+                type="hidden"
+                name="authorId"
+                id="authorId"
+                value={post.author.toString()}
+            />
             <div className="mt-1 container font-bold tracking-wide w-screen shadow-inner flex flex-col gap-6 md:gap-8 lg:gap-10 p-10 md:px-20 md:pt-10 md:pb-14 lg:px-32 lg:pb-20 bg-base-200 border rounded-lg border-base-content">
                 <h1 className="text-center text-xl md:text-3xl lg:text-5xl tracking-wide">
                     Update post
@@ -112,8 +117,13 @@ const PostEdit = ({ session, user, post }: Props) => {
                         }}
                         onUploadError={(error: Error) => {
                             // Do something with the error.
-                            toast.error(`ERROR! ${error.message}`);
-                            toast.error(`Please try refreshing the page.`);
+                            if (error.message.includes("JSON")) {
+                                toast.error(
+                                    "Network error, please refresh the page and try again."
+                                );
+                            } else {
+                                toast.error(`ERROR! ${error.message}`);
+                            }
                         }}
                     />
                 </div>

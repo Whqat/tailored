@@ -1,19 +1,16 @@
+"use client";
 import { Session } from "next-auth";
 import { LogoutButton } from "./auth/LogoutButton";
 import Link from "next/link";
 import Image from "next/image";
 
 const Navbar = ({ session, userId }: { session: Session | null; userId: string | null }) => {
+    // TODO: IMPLEMENT POST SEARCH
     return (
         <div className="relative navbar z-50 bg-base-100 border-b border-base-content md:px-10 lg:px-16">
             <div className="flex-1">
                 <Link href="/home" scroll={false} className="btn btn-ghost text-xl">
-                    <Image
-                        src="logo-no-background.svg"
-                        width="80"
-                        height="80"
-                        alt="Logo"
-                    />
+                    <Image src="/logo-no-background.svg" width="80" height="80" alt="Logo" />
                     tailored
                 </Link>
             </div>

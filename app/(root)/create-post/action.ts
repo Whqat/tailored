@@ -27,4 +27,5 @@ export default async function createPost(newPost: any) {
     }
     revalidatePath("/home");
     redirect("/home?success=true");
+
 }

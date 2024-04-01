@@ -85,7 +85,7 @@ const ProfileEdit = ({ session, user }: Props) => {
                         alt="image"
                         width="300"
                         height="300"
-                        className="rounded-[100%] min-w-[150px] min-h-[150px] object-cover self-center shadow-md border border-base-content bg-base-content"
+                        className="rounded-[100%] size-[100px] sm:size-[120px] md:size-[150px] object-cover self-center shadow-md border border-base-content bg-base-content"
                     />
                 )}
                 <div className="flex justify-center gap-3 md:gap-5 lg:gap-10">
