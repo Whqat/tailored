@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import PostCardClient from "./PostCardClient";
+import PostCardMini from "./PostCardMini";
 
 interface PostInterface {
     _id: string;
@@ -103,7 +103,7 @@ const Profile = ({ user, isOwner }: Props) => {
                                     day: "numeric",
                                 });
                                 return (
-                                    <PostCardClient
+                                    <PostCardMini
                                         key={post._id.toString()}
                                         id={post._id.toString()}
                                         title={post.title}
@@ -120,16 +120,16 @@ const Profile = ({ user, isOwner }: Props) => {
                         )}
                     </div>
                 )}
+            </div>
                 {user.posts.length > posts.length && (
                     <button
                         type="button"
-                        className="btn btn-primary font-bold px-6 mt-2 py-2 rounded-lg"
+                        className="btn btn-primary font-bold px-6 mt-2 py-2 mx-auto rounded-lg"
                         onClick={() => setPage(page + 1)}
                     >
                         Load more
                     </button>
                 )}
-            </div>
         </div>
     );
 };

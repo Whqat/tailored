@@ -3,8 +3,8 @@ import { Maven_Pro } from "next/font/google";
 import "./globals.css";
 
 export const metadata: Metadata = {
-    title: "Next App + Next Auth - Template",
-    description: "Authentication template for Next.js applications",
+    title: "tailored",
+    description: "Modern blogging platform. Tailor your blogs into beautiful modern designs.",
 };
 
 export const font = Maven_Pro({ subsets: ["latin"], display: "swap" });

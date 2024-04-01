@@ -15,16 +15,16 @@ interface ApiPostInterface {
 }
 
 export default function Home() {
-    const [scrollPosition, setScrollPosition] = useState<number|null>(null);
-    const [numberOfPostsInDb, setNumberOfPostsInDb] = useState(0)
+    const [scrollPosition, setScrollPosition] = useState<number | null>(null);
+    const [numberOfPostsInDb, setNumberOfPostsInDb] = useState(0);
     const [page, setPage] = useState(1);
     const [posts, setPosts] = useState<any[]>([]);
     const [postsLoading, setPostsLoading] = useState(false);
 
     const handleLoadMore = () => {
-        setScrollPosition(window.scrollY || null)
+        setScrollPosition(window.scrollY || null);
         setPage(page + 1);
-    }
+    };
 
     // fetch posts from api
     useEffect(() => {
@@ -37,7 +37,7 @@ export default function Home() {
                 }
                 const data = await response.json();
                 setPosts(posts.concat(data.posts));
-                setNumberOfPostsInDb(data.numberOfPosts)
+                setNumberOfPostsInDb(data.numberOfPosts);
             } catch (err) {
                 console.error(err);
             } finally {
@@ -53,8 +53,8 @@ export default function Home() {
         if (scrollPosition) {
             window.scrollTo(0, scrollPosition);
         }
-    }, [posts]) // Re-run effect on post change
-    
+    }, [posts]); // Re-run effect on post change
+
     return (
         <main className="flex min-h-screen flex-col items-center gap-10 p-8 md:p-12 lg:p-16">
             <h1 className="text-2xl sm:text-3xl tracking-wide md:text-4xl md:tracking-wider text-base-content font-bold">
@@ -103,7 +103,6 @@ export default function Home() {
                         Load more
                     </button>
                 )}
-                
             </div>
         </main>
     );
