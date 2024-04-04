@@ -10,6 +10,7 @@ interface Props {
 }
 
 const PostCardClient = async ({ id, title, content, thumbnail, date }: Props) => {
+    // TODO: POST LIKE
     return (
         <div className="group card max-w-96 rounded-3xl relative border-2 cursor-pointer overflow-hidden border-base-content max-h-[10.5rem] sm:max-h-[12rem] md:max-h-[16rem] lg:max-h-[18.75rem] bg-base-100 shadow-inner image-full">
             <Link href={`/post/${id}`} scroll={false} className="absolute inset-0 z-30"></Link>

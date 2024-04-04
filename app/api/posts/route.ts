@@ -8,20 +8,20 @@ export async function GET(req: NextRequest) {
     const page = Number(searchParams.get("page"));
 
     try {
-        // Pagination logic (adjust as needed)
-        const limit = 3; // adjust limit as needed
+        // Pagination logic
+        const limit = 3;
         const skip = (page - 1) * limit;
 
         await dbConnect();
 
         // Find all posts for the user with pagination
         const posts = await Post.find()
-            .lean()
+            .lean()                  // return as a mutable json object
             .sort({ createdAt: -1 }) // sort by latest first (optional)
             .limit(limit)
             .skip(skip);
 
-        const modifiedPostsPromises = posts.map(async (post) => {
+        const modifiedPostsPromises: Promise<Object>[] = posts.map(async (post) => {
             const authorObject = await User.findById(post.author);
             return {
                 ...post,
@@ -30,6 +30,7 @@ export async function GET(req: NextRequest) {
             };
         });
 
+        // Wait for all mapping to finish
         const modifiedPosts = await Promise.all(modifiedPostsPromises);
 
         return Response.json({ posts: modifiedPosts, numberOfPosts: await Post.countDocuments() }, { status: 200 });

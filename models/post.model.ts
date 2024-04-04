@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 // post schema
 const PostSchema = new Schema({
@@ -29,8 +29,10 @@ const PostSchema = new Schema({
         type: Date,
         default: Date.now,
     },
+    likes: {
+        type: [mongoose.Schema.Types.ObjectId],
+        default: [],
+    },
 });
-
-
 
 export const Post = mongoose.models.Post || mongoose.model("Post", PostSchema);

@@ -1,6 +1,7 @@
 "use client";
 
 import PostCard from "@/components/PostCard";
+import { SessionProvider } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -13,6 +14,7 @@ interface ApiPostInterface {
     authorName: string;
     authorImage: string;
     thumbnail: string;
+    likes: string[];
     createdAt: Date;
 }
 
@@ -71,6 +73,19 @@ export default function Home() {
             <h1 className="text-2xl sm:text-3xl tracking-wide md:text-4xl md:tracking-wider text-base-content font-bold">
                 Posts
             </h1>
+            <form action="" className="flex flex-row gap-2 mb-5">
+                <input
+                    type="text"
+                    className="input input-bordered w-full"
+                    placeholder="Search posts..."
+                />
+                <button
+                    type="submit"
+                    className="btn btn-primary font-bold px-6 py-2 rounded-lg"
+                >
+                    Search
+                </button>
+            </form>
             <div className="container flex flex-wrap gap-5 justify-around">
                 {postsLoading ? (
                     <p className="text-center font-medium">Loading posts...</p>
@@ -85,17 +100,20 @@ export default function Home() {
                                     day: "numeric",
                                 });
                                 return (
-                                    <PostCard
-                                        key={post._id.toString()}
-                                        id={post._id.toString()}
-                                        title={post.title}
-                                        content={post.content}
-                                        authorId={post.author.toString()}
-                                        authorName={post.authorName}
-                                        authorImage={post.authorImage}
-                                        thumbnail={post.thumbnail}
-                                        date={formattedDate}
-                                    />
+                                    <SessionProvider key={post._id}>
+                                        <PostCard
+                                            key={post._id.toString()}
+                                            id={post._id.toString()}
+                                            title={post.title}
+                                            content={post.content}
+                                            authorId={post.author.toString()}
+                                            authorName={post.authorName}
+                                            authorImage={post.authorImage}
+                                            thumbnail={post.thumbnail}
+                                            likes={post.likes}
+                                            date={formattedDate}
+                                        />
+                                    </SessionProvider>
                                 );
                             })
                         ) : (

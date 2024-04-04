@@ -1,11 +1,9 @@
-"use client";
 import { Session } from "next-auth";
 import { LogoutButton } from "./auth/LogoutButton";
 import Link from "next/link";
 import Image from "next/image";
 
 const Navbar = ({ session, userId }: { session: Session | null; userId: string | null }) => {
-    // TODO: IMPLEMENT POST SEARCH
     return (
         <div className="relative navbar z-50 bg-base-100 border-b border-base-content md:px-10 lg:px-16">
             <div className="flex-1">
