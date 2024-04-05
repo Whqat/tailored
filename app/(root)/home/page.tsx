@@ -2,6 +2,7 @@
 
 import PostCard from "@/components/PostCard";
 import { SessionProvider } from "next-auth/react";
+import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -26,10 +27,21 @@ export default function Home() {
     const [page, setPage] = useState(1);
     const [posts, setPosts] = useState<any[]>([]);
     const [postsLoading, setPostsLoading] = useState(false);
+    const [search, setSearch] = useState("");
 
     const handleLoadMore = () => {
         setScrollPosition(window.scrollY || null);
         setPage(page + 1);
+    };
+
+    const handleFormSubmit = (formData: FormData) => {
+        router.push(`/home?search=${formData.get("search")}`);
+    };
+
+    const handleClearSearch = (e: React.FormEvent) => {
+        e.preventDefault();
+        toast.success("Search cleared");
+        router.push("/home");
     };
 
     // fetch posts from api
@@ -66,6 +78,10 @@ export default function Home() {
             toast.success("Post created sucessfully");
             router.push("/home"); // Clear query param
         }
+        if (params.get("search")) {
+            setSearch(params.get("search") as string);
+            toast.success("Search applied");
+        }
     }, [params]); // Re-run effect on query param change
 
     return (
@@ -73,17 +89,22 @@ export default function Home() {
             <h1 className="text-2xl sm:text-3xl tracking-wide md:text-4xl md:tracking-wider text-base-content font-bold">
                 Posts
             </h1>
-            <form action="" className="flex flex-row gap-2 mb-5">
+            <form action={handleFormSubmit} className="flex flex-row gap-2 mb-5">
                 <input
                     type="text"
                     className="input input-bordered w-full"
+                    name="search"
+                    id="search"
                     placeholder="Search posts..."
                 />
+                <button type="submit" className="btn btn-primary font-bold rounded-lg">
+                    <Image src="/search-gray.svg" alt="Search" width={20} height={20} />
+                </button>
                 <button
-                    type="submit"
-                    className="btn btn-primary font-bold px-6 py-2 rounded-lg"
+                    className="btn btn-secondary font-bold rounded-lg"
+                    onClick={handleClearSearch}
                 >
-                    Search
+                    <Image src="/delete.svg" alt="Clear" width={20} height={20} />
                 </button>
             </form>
             <div className="container flex flex-wrap gap-5 justify-around">
@@ -93,6 +114,21 @@ export default function Home() {
                     <div className="container flex flex-wrap gap-4 md:gap-5 lg:gap-7 justify-center">
                         {posts ? (
                             posts.map((post: ApiPostInterface) => {
+                                // Check for search filter, if exists filter posts
+                                if (search) {
+                                    if (
+                                        !post.title
+                                            .toLowerCase()
+                                            .includes(search.toLowerCase()) &&
+                                        !post.content
+                                            .toLowerCase()
+                                            .includes(search.toLowerCase())
+                                    ) {
+                                        return null;
+                                    }
+                                }
+
+                                // Format date
                                 const date = new Date(post.createdAt);
                                 const formattedDate = date.toLocaleDateString("en-US", {
                                     year: "numeric",
