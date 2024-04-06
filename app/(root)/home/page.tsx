@@ -35,13 +35,28 @@ export default function Home() {
     };
 
     const handleFormSubmit = (formData: FormData) => {
-        router.push(`/home?search=${formData.get("search")}`);
+        const searchQuery = formData.get("search") as string | null;
+        if (searchQuery) {
+            setPosts([]);
+            setSearch(searchQuery);
+        } else {
+            toast.error("Please enter a valid search query");
+        }
     };
 
-    const handleClearSearch = (e: React.FormEvent) => {
-        e.preventDefault();
+    const handleClearSearch = (e: any = undefined) => {
+        if (e) {
+            e.preventDefault();
+        }
+        setSearch("");
+        setPosts([]);
+        setPage(1);
+        const el = document.getElementById("search") as HTMLInputElement;
+        if (el) {
+            el.value = "";
+        }
         toast.success("Search cleared");
-        router.push("/home");
+        router.refresh();
     };
 
     // fetch posts from api
@@ -49,7 +64,7 @@ export default function Home() {
         const fetchPosts = async () => {
             setPostsLoading(true);
             try {
-                const response = await fetch(`/api/posts?page=${page}`);
+                const response = await fetch(`/api/posts?page=${page}&search=${search}`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch posts");
                 }
@@ -64,7 +79,7 @@ export default function Home() {
         };
 
         fetchPosts();
-    }, [page]); // Re-run effect on page change
+    }, [page, search]); // Re-run effect on page change
 
     // maintain scroll position when posts are loaded (upon clikcing Load more)
     useEffect(() => {
@@ -77,10 +92,6 @@ export default function Home() {
         if (params.get("success")) {
             toast.success("Post created sucessfully");
             router.push("/home"); // Clear query param
-        }
-        if (params.get("search")) {
-            setSearch(params.get("search") as string);
-            toast.success("Search applied");
         }
     }, [params]); // Re-run effect on query param change
 
