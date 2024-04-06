@@ -88,7 +88,7 @@ const Profile = ({ user, isOwner }: Props) => {
 
             <div>
                 <h1 className="text-3xl md:text-4xl font-bold mt-8 text-center mb-6 md:mb-7 lg:mb-8">
-                    {user.name}'s Posts
+                    {user.name}&apos;s Posts
                 </h1>
                 {postsLoading ? (
                     <p className="text-center font-medium">Loading posts...</p>
