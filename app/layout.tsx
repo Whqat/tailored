@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     description: "Modern blogging platform. Tailor your blogs into beautiful modern designs.",
 };
 
-export const font = Maven_Pro({ subsets: ["latin"], display: "swap" });
+const font = Maven_Pro({ subsets: ["latin"], display: "swap" });
 
 export default async function RootLayout({
     children,
