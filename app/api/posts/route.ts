@@ -2,7 +2,6 @@ import { Post } from "@/models/post.model";
 import { User } from "@/models/user.model";
 import dbConnect from "@/lib/utils/mongooseConnection";
 import { type NextRequest } from "next/server";
-import { PiSignpost } from "react-icons/pi";
 
 export async function GET(req: NextRequest) {
     const searchParams = req.nextUrl.searchParams;

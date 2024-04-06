@@ -3,7 +3,7 @@ declare global {
     var mongoose: any; // This must be a `var` and not a `let / const`
 }
 
-const MONGODB_URI = `${process.env.MONGODB_URL}/${process.env.DB_NAME}`;
+const MONGODB_URI = process.env.MONGODB_URI as string;
 
 if (!MONGODB_URI) {
     throw new Error("Please define the MONGODB_URI environment variable inside .env.local");
