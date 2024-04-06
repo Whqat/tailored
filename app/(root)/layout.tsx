@@ -5,8 +5,8 @@ import "@uploadthing/react/styles.css";
 import "../globals.css";
 
 export const metadata: Metadata = {
-    title: "Next App + Next Auth - Template",
-    description: "Authentication template for Next.js applications",
+    title: "tailored | Home",
+    description: "Tailor modern posts on our blogging platform!",
 };
 
 import Navbar from "@/components/Navbar";
