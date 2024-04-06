@@ -17,10 +17,17 @@ export async function GET(req: NextRequest) {
 
         // If search query is passed to body
         if (search) {
-            // Find all posts for the user with pagination
-            const posts = await Post.find({ $text: { $search: search } })
-                .lean() // return as a mutable json object
-                .sort({ createdAt: -1 }) // sort by latest first (optional)
+            const searchRegex = new RegExp(search, "i"); // Create a regex for case-insensitive partial match
+
+            // Find all posts with the search term using regex
+            const posts = await Post.find({
+                $or: [
+                    { title: { $regex: searchRegex } },
+                    { content: { $regex: searchRegex } },
+                ],
+            }) // Assuming you want to search in the 'title' field
+                .lean()
+                .sort({ createdAt: -1 })
                 .limit(limit)
                 .skip(skip);
 
@@ -40,7 +47,12 @@ export async function GET(req: NextRequest) {
             return Response.json(
                 {
                     posts: modifiedPosts,
-                    numberOfPosts: await Post.countDocuments({ $text: { $search: search } }),
+                    numberOfPosts: await Post.countDocuments({
+                        $or: [
+                            { title: { $regex: searchRegex } },
+                            { content: { $regex: searchRegex } },
+                        ],
+                    }),
                 },
                 { status: 200 }
             );
