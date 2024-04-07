@@ -15,7 +15,6 @@ export default function HomeLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-
     return (
         <main className="h-full overflow-x-hidden">
             <Navbar />
