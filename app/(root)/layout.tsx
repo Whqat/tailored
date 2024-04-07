@@ -9,8 +9,7 @@ export const metadata: Metadata = {
     description: "Tailor modern posts on our blogging platform.",
 };
 
-// import Navbar from "@/components/Navbar";
-import Navbar from "../../components/Navbar"
+import Navbar from "@/components/Navbar";
 import { Toaster } from "react-hot-toast";
 import { User } from "@/models/user.model";
 import dbConnect from "@/lib/utils/mongooseConnection";
