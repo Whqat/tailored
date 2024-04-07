@@ -14,19 +14,19 @@ import { Toaster } from "react-hot-toast";
 import { User } from "@/models/user.model";
 import dbConnect from "@/lib/utils/mongooseConnection";
 
-export default async function HomeLayout({
+export default function HomeLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const session = await getServerSession(authOptions);
-    await dbConnect();
-    const user = await User.findOne({ email: session?.user?.email });
-    const userId = await user?._id?.toString();
+    // const session = await getServerSession(authOptions);
+    // await dbConnect();
+    // const user = await User.findOne({ email: session?.user?.email });
+    // const userId = await user?._id?.toString();
 
     return (
         <main className="h-full overflow-x-hidden">
-            <Navbar session={session} userId={userId} />
+            {/* <Navbar session={session} userId={userId} /> */}
             {children}
             <Toaster position="bottom-right" />
         </main>
