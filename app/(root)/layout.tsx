@@ -6,7 +6,7 @@ import "../globals.css";
 
 export const metadata: Metadata = {
     title: "tailored | Home",
-    description: "Tailor modern posts on our blogging platform!",
+    description: "Tailor modern posts on our blogging platform.",
 };
 
 import Navbar from "@/components/Navbar";
