@@ -1,9 +1,12 @@
-import { Session } from "next-auth";
 import { LogoutButton } from "./auth/LogoutButton";
 import Link from "next/link";
 import Image from "next/image";
+import { authOptions } from "@/lib/utils/auth";
+import { getServerSession } from "next-auth";
 
-const Navbar = ({ session, userId }: { session: Session | null; userId: string | null }) => {
+const Navbar = async () => {
+    const session = await getServerSession(authOptions);
+
     return (
         <div className="relative navbar z-50 bg-base-100 border-b border-base-content md:px-10 lg:px-16">
             <div className="flex-1">
@@ -37,7 +40,7 @@ const Navbar = ({ session, userId }: { session: Session | null; userId: string |
                                 className="mt-3 z-[1000] px-3 py-4 shadow menu menu-sm dropdown-content bg-base-300 rounded-box w-52"
                             >
                                 <li>
-                                    <Link href={`/profile/${userId}`} scroll={false}>
+                                    <Link href={`/profile/${session?.user?.id}`} scroll={false}>
                                         Profile
                                     </Link>
                                 </li>
